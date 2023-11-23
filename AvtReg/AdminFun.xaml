@@ -1,0 +1,38 @@
+﻿<Page x:Class="AvtReg.AdminFun"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AvtReg"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminFun">
+
+        <Grid Background="LightBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="397*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+            <Button x:Name="sortbig" Click="sortbig_Click" Content="Сортировка по возрастанию фамилии"/>
+            <Button x:Name="sortsmall" Click="sortsmall_Click" Content="Сортировка по убыванию фамилии"/>
+            <ComboBox x:Name="gender"  SelectionChanged="gender_Selected" materialDesign:HintAssist.Hint="Выберите пол" Style="{DynamicResource MaterialDesignFloatingHintComboBox}"/>
+            <TextBox x:Name="poisk" materialDesign:HintAssist.Hint="Поиск" TextChanged="poisk_TextChanged" Width="300"></TextBox>
+            <Button x:Name="clear" Click="clear_Click" Content="Сбросить все фильтры"/>
+            <Button x:Name="glav" Click="glav_Click"  Content="Выйти"/>
+        </WrapPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" HorizontalAlignment="Center">
+            <DataGrid Name="All" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=Surname}"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name}"/>
+                    <DataGridTextColumn Header="Отчество" Binding="{Binding Path=Patronymic}"/>
+                    <DataGridTextColumn Header="Логин" Binding="{Binding Path=Login}"/>
+                    <DataGridTextColumn Header="Пол" Binding="{Binding Path=Genders}"/>
+                    <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=Date_of_birth}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</Page>

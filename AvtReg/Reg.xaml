@@ -1,0 +1,35 @@
+﻿<Page x:Class="AvtReg.Reg"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AvtReg"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Reg">
+
+    <Grid Background="LightBlue">
+        <Border MinWidth="400" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" MaxWidth="550" CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="100" Color="blue" ShadowDepth="0"></DropShadowEffect>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Регистрация" FontSize="30" FontWeight="Bold" Margin="0 0 0 10" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Заполните поля" FontSize="15" HorizontalAlignment="Center" Margin="0 0 0 10"></TextBlock>
+                <TextBox x:Name="surname" materialDesign:HintAssist.Hint="Введиите Фамилию" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="name" materialDesign:HintAssist.Hint="Введиите Имя" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="patronymic" materialDesign:HintAssist.Hint="Введиите Отчество" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="login" materialDesign:HintAssist.Hint="Введиите Логин" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox x:Name="password" materialDesign:HintAssist.Hint="Введиите Пароль" Style="{DynamicResource MaterialDesignFloatingHintPasswordBox}"/>
+                <ComboBox x:Name="gender" materialDesign:HintAssist.Hint="Выберите Пол" Style="{DynamicResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                <DatePicker Name ="dob" materialDesign:HintAssist.Hint="Введите Дату Рождения" Style="{DynamicResource MaterialDesignFloatingHintDatePicker}"></DatePicker>
+                <ComboBox x:Name="role" materialDesign:HintAssist.Hint="Выберите Роль" Style="{DynamicResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                <Grid  Margin="10">
+                    <Button x:Name="reg" Click="reg_Click" HorizontalAlignment="Center" Margin="20" Content="Зарегистрироваться"></Button>
+                    <Button x:Name="glav" Click="glav_Click" HorizontalAlignment="Left" Margin="20" Content="Выйти"></Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
