@@ -26,8 +26,8 @@ namespace AvtReg
             InitializeComponent();
             All.ItemsSource = users.usr.ToList();
             gender.ItemsSource = DataBase.database.Gender.ToList();
-            gender.SelectedValue = "Id-gender";
-            gender.DisplayMemberPath = "Gender";
+            gender.SelectedValue = "Id_gender";
+            gender.DisplayMemberPath = "Gender1";
             gender.SelectedIndex = -1;
         }
 

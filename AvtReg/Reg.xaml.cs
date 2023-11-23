@@ -26,16 +26,17 @@ namespace AvtReg
             InitializeComponent();
             gender.ItemsSource = DataBase.database.Gender.ToList();
             gender.SelectedValue = "Id_gender";
-            gender.DisplayMemberPath = "Gender";
+            gender.DisplayMemberPath = "Gender1";
 
             role.ItemsSource = DataBase.database.Role.ToList();
             role.SelectedValue = "Id_role";
-            role.DisplayMemberPath = "Role";
+            role.DisplayMemberPath = "Role1";
             role.SelectedIndex = 1;
         }
 
         private void reg_Click(object sender, RoutedEventArgs e)
         {
+            User user = DataBase.database.User.FirstOrDefault(x => x.Login == login.Text);
             string Surname = surname.Text.Trim();
             string Name = name.Text.Trim();
             string Patronymic = patronymic.Text.Trim();
@@ -53,41 +54,39 @@ namespace AvtReg
 
             if (pass1.IsMatch(password.Password) == false)
             {
-                password.ToolTip = "Это поле введено не корректно";
-                password.Background = Brushes.LightCoral;
-                MessageBox.Show("Пароль должен содержать хотя бы 1 заглавную латискую букву");
+                password.ToolTip = "Ошибка ввода";
+                password.Background = Brushes.Aqua;
+                MessageBox.Show("Пароль должен содержать не менее 1 заглавной латиской буквы");
             }
             else if (pass2.Matches(password.Password).Count < 3)
             {
-                password.ToolTip = "Это поле введено не корректно";
-                password.Background = Brushes.LightCoral;
-                MessageBox.Show("Пароль должен содержать не менее 3 прописных латинских символов");
+                password.ToolTip = "Ошибка ввода";
+                password.Background = Brushes.Aqua;
+                MessageBox.Show("Пароль должен содержать не менее 3 прописных латинских букв");
             }
             else if (pass3.Matches(password.Password).Count < 2)
             {
-                password.ToolTip = "Это поле введено не корректно";
-                password.Background = Brushes.LightCoral;
-                MessageBox.Show("Пароль должен содержать минимум 2 цифры");
+                password.ToolTip = "Ошибка ввода";
+                password.Background = Brushes.Aqua;
+                MessageBox.Show("Пароль должен содержать не менее 2 цифр");
             }
             else if (pass4.IsMatch(password.Password) == false)
             {
-                password.ToolTip = "Это поле введено не корректно";
-                password.Background = Brushes.LightCoral;
-                MessageBox.Show("Пароль должен содержать хотя бы 1 спецсимвол");
+                password.ToolTip = "Ошибка ввода";
+                password.Background = Brushes.Aqua;
+                MessageBox.Show("Пароль должен содержать не менее 1 спецсимвол");
             }
             else if (pass5.Matches(password.Password).Count < 8)
             {
-                password.ToolTip = "Это поле введено не корректно";
-                password.Background = Brushes.LightCoral;
+                password.ToolTip = "Ошибка ввода";
+                password.Background = Brushes.Aqua;
                 MessageBox.Show("Пароль должен содержать не менее 8 символов");
             }
-            User user = DataBase.database.User.FirstOrDefault(x => x.Login == login.Text);
-            if (user != null)
+            else if (user != null)
             {
                 MessageBox.Show("Пользователь с таким логином уже существует.");
-
-                login.ToolTip = "Это поле введено не корректно";
-                login.Background = Brushes.LightCoral;
+                login.ToolTip = "Ошибка ввода";
+                login.Background = Brushes.Aqua;
             }
             else if (true)
             {
@@ -119,7 +118,6 @@ namespace AvtReg
                 }
             }
         }
-
         private void glav_Click(object sender, RoutedEventArgs e)
         {
               NavigationService.Navigate(new Avtor());

@@ -11,8 +11,8 @@
 
         <Grid Background="LightBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="53*"/>
-            <RowDefinition Height="397*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
         <WrapPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
             <Button x:Name="sortbig" Click="sortbig_Click" Content="Сортировка по возрастанию фамилии"/>

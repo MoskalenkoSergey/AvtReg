@@ -10,22 +10,15 @@
       Title="Avtor">
 
     <Grid Background="LightBlue">
-        <Border MinWidth="400" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" MaxWidth="550" CornerRadius="20">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="100" Color="Blue" ShadowDepth="0"></DropShadowEffect>
-            </Border.Effect>
+        <Border Margin="15" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="50" Width="500">
             <StackPanel>
                 <TextBlock Text="Авторизация" FontSize="30" FontWeight="Bold" Margin="0 0 0 10" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Text="Заполните поля" FontSize="15" HorizontalAlignment="Center" Margin="0 0 0 10"></TextBlock>
+                <TextBlock Text="Заполните поля" FontSize="20" HorizontalAlignment="Center" Margin="0 0 0 10"></TextBlock>
                 <TextBox x:Name="login" materialDesign:HintAssist.Hint="Введиите Логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <PasswordBox x:Name="password" materialDesign:HintAssist.Hint="Введиите Пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
-
-                <Button x:Name="vhod" Click="vhod_Click" HorizontalAlignment="Center" Margin="20" FontSize="20" Content="Войти"></Button>
-                <Button x:Name="reg" Click="reg_Click" HorizontalAlignment="Center" Margin="10" FontSize="20" Content="Зарегистрироваться"></Button>
+                <Button x:Name="vhod" Click="vhod_Click" HorizontalAlignment="Center" Margin="10, 20" FontSize="20" Content="Войти"></Button>
+                <Button x:Name="reg" Click="reg_Click" HorizontalAlignment="Center" FontSize="20" Content="Зарегистрироваться"></Button>
             </StackPanel>
-
         </Border>
-
     </Grid>
 </Page>
-

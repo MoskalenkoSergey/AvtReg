@@ -9,10 +9,7 @@
       Title="AdminMenu">
 
     <Grid Background="LightBlue">
-        <Border Margin="15" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="30" CornerRadius="20">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="100" Color="Blue" ShadowDepth="0"></DropShadowEffect>
-            </Border.Effect>
+        <Border Width="500" Margin="15" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="30" CornerRadius="50">
             <StackPanel>
                 <TextBlock Text="Меню Администратора" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Text="Вы можете просматривать данные о зарегистрированных пользователях" FontSize="20" Margin="10"></TextBlock>

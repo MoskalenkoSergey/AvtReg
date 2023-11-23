@@ -9,10 +9,7 @@
       Title="UserMenu">
 
     <Grid Background="LightBlue">
-        <Border MinWidth="400" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" MaxWidth="550" CornerRadius="20">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="100" Color="Blue" ShadowDepth="0"></DropShadowEffect>
-            </Border.Effect>
+        <Border Width="500" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="50">
             <StackPanel>
                 <TextBlock Text="Меню Пользователя" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Text="Вы ничего не можете" FontSize="20" HorizontalAlignment="Center" Margin="10"></TextBlock>

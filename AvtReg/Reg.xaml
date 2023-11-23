@@ -10,13 +10,10 @@
       Title="Reg">
 
     <Grid Background="LightBlue">
-        <Border MinWidth="400" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" MaxWidth="550" CornerRadius="20">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="100" Color="blue" ShadowDepth="0"></DropShadowEffect>
-            </Border.Effect>
+        <Border Width="500" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="50">
             <StackPanel>
                 <TextBlock Text="Регистрация" FontSize="30" FontWeight="Bold" Margin="0 0 0 10" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Text="Заполните поля" FontSize="15" HorizontalAlignment="Center" Margin="0 0 0 10"></TextBlock>
+                <TextBlock Text="Заполните поля" FontSize="20" HorizontalAlignment="Center" Margin="0 0 0 10"></TextBlock>
                 <TextBox x:Name="surname" materialDesign:HintAssist.Hint="Введиите Фамилию" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="name" materialDesign:HintAssist.Hint="Введиите Имя" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="patronymic" materialDesign:HintAssist.Hint="Введиите Отчество" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>

@@ -27,8 +27,8 @@ namespace AvtReg
 
         private void vhod_Click(object sender, RoutedEventArgs e)
         {
-            string hashedPassword = password.Password.GetHashCode().ToString();
-            User user = DataBase.database.User.FirstOrDefault(x => x.Login == login.Text && x.Password == hashedPassword);
+            string hashPassword = password.Password.GetHashCode().ToString();
+            User user = DataBase.database.User.FirstOrDefault(x => x.Login == login.Text && x.Password == hashPassword);
             if (user != null)
             {
                 if (user.Id_role == 1)
@@ -42,7 +42,7 @@ namespace AvtReg
             }
             else
             {
-                MessageBox.Show("Такого аккаунта не существует! Попробуйте снова или зарегистрируйтесь.");
+                MessageBox.Show("Такого акаунта не существует, попробуйте снова или зарегистрируйтесь!");
             }
         }
 
