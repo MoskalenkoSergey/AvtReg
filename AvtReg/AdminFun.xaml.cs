@@ -69,7 +69,7 @@ namespace AvtReg
 
         private void glav_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Avtor());
+            NavigationService.Navigate(new AdminMenu());
         }
     }
 }

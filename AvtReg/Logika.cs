@@ -60,4 +60,69 @@ namespace AvtReg
             return users;
         }
     }
+    public partial class Agent
+    {
+        public string roleagent;
+        public string RoleAgent
+        {
+            get { return roleagent; }
+            set { roleagent = value; }
+        }
+
+        public string skillsagent;
+        public string SkillsAgent
+        {
+            get { return skillsagent.Remove(skillsagent.Length - 2); }
+            set { skillsagent = value; }
+        }
+    }
+
+    public class Person
+    {
+        public List<Agent> agent;
+        public Person()
+        {
+            agent = newagent();
+        }
+
+        public List<Agent> newagent()
+        {
+            List<Agent> agents = new List<Agent>();
+            Agent buff;
+            List<Agent> bduagents = DataBase.database.Agent.ToList();
+            List<Agent_Skills> bdagentskills = DataBase.database.Agent_Skills.ToList();
+            List<Skills> bdskills = DataBase.database.Skills.ToList();
+
+            foreach (Agent agent in bduagents)
+            {
+                buff = new Agent();
+                buff.Id_agent = agent.Id_agent;
+                buff.Name_agent = agent.Name_agent;
+                buff.Id_role_agent = agent.Id_role_agent;
+                Role_agent role = DataBase.database.Role_agent.FirstOrDefault(x => x.Id_role_agent == buff.Id_role_agent);
+                buff.Discreption_agent = agent.Discreption_agent;;
+
+                string allagents = "";
+                foreach (Agent_Skills agent_Skills in bdagentskills)
+                {
+                    if (agent.Id_agent == agent_Skills.Id_agent)
+                    {
+                        foreach (Skills skillsagent in bdskills)
+                        {
+                            if (agent_Skills.Id_skills == skillsagent.Id_skills)
+                            {
+                                allagents += skillsagent.Title_skills + ", ";
+                                agent.skillsagent = allagents;
+                                break;
+                            }
+                        }
+                    }
+                }
+                buff.skillsagent = agent.skillsagent;
+                buff.roleagent = role.Title_role_agent;
+                agents.Add(buff);
+            }
+            return agents;
+        }
+    }
 }

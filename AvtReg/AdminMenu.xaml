@@ -9,12 +9,16 @@
       Title="AdminMenu">
 
     <Grid Background="LightBlue">
-        <Border Width="500" Margin="15" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="30" CornerRadius="50">
+        <Border Width="716" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="30" CornerRadius="50" Height="313">
             <StackPanel>
                 <TextBlock Text="Меню Администратора" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Text="Вы можете просматривать данные о зарегистрированных пользователях" FontSize="20" Margin="10"></TextBlock>
+                <TextBlock Text="Просмотр данных о зарегистрированных пользователях" FontSize="20" Margin="10" Width="530"></TextBlock>
                 <Grid Margin="0 0 0 20">
                     <Button x:Name="adminfun" Click="adminfun_Click" HorizontalAlignment="Center" Content="Перейти к просмотру" FontSize="15"></Button>
+                </Grid>
+                <TextBlock Text="Просмотр данных из базы" FontSize="20" Margin="10" Width="256"></TextBlock>
+                <Grid Margin="0 0 0 20">
+                    <Button x:Name="checkdb" Click="checkdb_Click" HorizontalAlignment="Center" Content="Перейти к просмотру" FontSize="15"></Button>
                 </Grid>
             </StackPanel>
         </Border>

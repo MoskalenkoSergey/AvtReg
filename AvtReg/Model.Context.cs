@@ -28,5 +28,12 @@ namespace AvtReg
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Agent> Agent { get; set; }
+        public virtual DbSet<Agent_Skills> Agent_Skills { get; set; }
+        public virtual DbSet<Player> Player { get; set; }
+        public virtual DbSet<Player_Agent> Player_Agent { get; set; }
+        public virtual DbSet<Price_skills> Price_skills { get; set; }
+        public virtual DbSet<Role_agent> Role_agent { get; set; }
+        public virtual DbSet<Skills> Skills { get; set; }
     }
 }

@@ -10,6 +10,19 @@
         <EntityTypeShape EntityType="BaseModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="BaseModel.FK_User_Gender" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.FK_Users_Role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BaseModel.Agent" Width="1.5" PointX="7.625" PointY="3.5" />
+        <EntityTypeShape EntityType="BaseModel.Agent_Skills" Width="1.5" PointX="9.875" PointY="0.75" />
+        <EntityTypeShape EntityType="BaseModel.Player" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="BaseModel.Player_Agent" Width="1.5" PointX="9.875" PointY="3.75" />
+        <EntityTypeShape EntityType="BaseModel.Price_skills" Width="1.5" PointX="5.375" PointY="8" />
+        <EntityTypeShape EntityType="BaseModel.Role_agent" Width="1.5" PointX="5.375" PointY="3.875" />
+        <EntityTypeShape EntityType="BaseModel.Skills" Width="1.5" PointX="7.625" PointY="7.625" />
+        <AssociationConnector Association="BaseModel.FK_Agent_Role_agent" />
+        <AssociationConnector Association="BaseModel.FK_Agent_Skills_Agent" />
+        <AssociationConnector Association="BaseModel.FK_Player_Agent_Agent" />
+        <AssociationConnector Association="BaseModel.FK_Agent_Skills_Skills" />
+        <AssociationConnector Association="BaseModel.FK_Player_Agent_Player" />
+        <AssociationConnector Association="BaseModel.FK_Skills_Price_skills" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

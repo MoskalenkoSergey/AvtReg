@@ -4,7 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище BaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище BaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id_agent" />
+          </Key>
+          <Property Name="Id_agent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_agent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_role_agent" Type="int" Nullable="false" />
+          <Property Name="Discreption_agent" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Agent_Skills">
+          <Key>
+            <PropertyRef Name="Id_agent_skills" />
+          </Key>
+          <Property Name="Id_agent_skills" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_agent" Type="int" Nullable="false" />
+          <Property Name="Id_skills" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="Id_gender" />
@@ -12,12 +29,53 @@
           <Property Name="Id_gender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id_player" />
+          </Key>
+          <Property Name="Id_player" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nick_player" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login_player" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password_player" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player_Agent">
+          <Key>
+            <PropertyRef Name="Id_player_agent" />
+          </Key>
+          <Property Name="Id_player_agent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_player" Type="int" Nullable="false" />
+          <Property Name="Id_agent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Price_skills">
+          <Key>
+            <PropertyRef Name="Id_price_skills" />
+          </Key>
+          <Property Name="Id_price_skills" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price_skills" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id_role" />
           </Key>
           <Property Name="Id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role_agent">
+          <Key>
+            <PropertyRef Name="Id_role_agent" />
+          </Key>
+          <Property Name="Id_role_agent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title_role_agent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discription_role_agent" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="Id_skills" />
+          </Key>
+          <Property Name="Id_skills" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title_skills" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discription_skills" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_price_skills" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -33,6 +91,78 @@
           <Property Name="Date_of_birth" Type="date" Nullable="false" />
           <Property Name="Id_role" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Agent_Role_agent">
+          <End Role="Role_agent" Type="Self.Role_agent" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_agent">
+              <PropertyRef Name="Id_role_agent" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Id_role_agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Skills_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Agent_Skills" Type="Self.Agent_Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id_agent" />
+            </Principal>
+            <Dependent Role="Agent_Skills">
+              <PropertyRef Name="Id_agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Skills_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="Agent_Skills" Type="Self.Agent_Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id_skills" />
+            </Principal>
+            <Dependent Role="Agent_Skills">
+              <PropertyRef Name="Id_skills" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Agent_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Player_Agent" Type="Self.Player_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id_agent" />
+            </Principal>
+            <Dependent Role="Player_Agent">
+              <PropertyRef Name="Id_agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Agent_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Player_Agent" Type="Self.Player_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id_player" />
+            </Principal>
+            <Dependent Role="Player_Agent">
+              <PropertyRef Name="Id_player" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skills_Price_skills">
+          <End Role="Price_skills" Type="Self.Price_skills" Multiplicity="1" />
+          <End Role="Skills" Type="Self.Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price_skills">
+              <PropertyRef Name="Id_price_skills" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="Id_price_skills" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -58,9 +188,40 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище BaseModelContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Agent_Skills" EntityType="Self.Agent_Skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player_Agent" EntityType="Self.Player_Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Price_skills" EntityType="Self.Price_skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_agent" EntityType="Self.Role_agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agent_Role_agent" Association="Self.FK_Agent_Role_agent">
+            <End Role="Role_agent" EntitySet="Role_agent" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Skills_Agent" Association="Self.FK_Agent_Skills_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Agent_Skills" EntitySet="Agent_Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Skills_Skills" Association="Self.FK_Agent_Skills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="Agent_Skills" EntitySet="Agent_Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Agent_Agent" Association="Self.FK_Player_Agent_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Player_Agent" EntitySet="Player_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Agent_Player" Association="Self.FK_Player_Agent_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Player_Agent" EntitySet="Player_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skills_Price_skills" Association="Self.FK_Skills_Price_skills">
+            <End Role="Price_skills" EntitySet="Price_skills" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Gender" Association="Self.FK_User_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="User" EntitySet="User" />
@@ -70,8 +231,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -143,7 +303,180 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <EntitySet Name="Agent" EntityType="BaseModel.Agent" />
+          <EntitySet Name="Agent_Skills" EntityType="BaseModel.Agent_Skills" />
+          <EntitySet Name="Player" EntityType="BaseModel.Player" />
+          <EntitySet Name="Player_Agent" EntityType="BaseModel.Player_Agent" />
+          <EntitySet Name="Price_skills" EntityType="BaseModel.Price_skills" />
+          <EntitySet Name="Role_agent" EntityType="BaseModel.Role_agent" />
+          <EntitySet Name="Skills" EntityType="BaseModel.Skills" />
+          <AssociationSet Name="FK_Agent_Role_agent" Association="BaseModel.FK_Agent_Role_agent">
+            <End Role="Role_agent" EntitySet="Role_agent" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Skills_Agent" Association="BaseModel.FK_Agent_Skills_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Agent_Skills" EntitySet="Agent_Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Agent_Agent" Association="BaseModel.FK_Player_Agent_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Player_Agent" EntitySet="Player_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Skills_Skills" Association="BaseModel.FK_Agent_Skills_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="Agent_Skills" EntitySet="Agent_Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Agent_Player" Association="BaseModel.FK_Player_Agent_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Player_Agent" EntitySet="Player_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skills_Price_skills" Association="BaseModel.FK_Skills_Price_skills">
+            <End Role="Price_skills" EntitySet="Price_skills" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id_agent" />
+          </Key>
+          <Property Name="Id_agent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_agent" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_role_agent" Type="Int32" Nullable="false" />
+          <Property Name="Discreption_agent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role_agent" Relationship="BaseModel.FK_Agent_Role_agent" FromRole="Agent" ToRole="Role_agent" />
+          <NavigationProperty Name="Agent_Skills" Relationship="BaseModel.FK_Agent_Skills_Agent" FromRole="Agent" ToRole="Agent_Skills" />
+          <NavigationProperty Name="Player_Agent" Relationship="BaseModel.FK_Player_Agent_Agent" FromRole="Agent" ToRole="Player_Agent" />
+        </EntityType>
+        <EntityType Name="Agent_Skills">
+          <Key>
+            <PropertyRef Name="Id_agent_skills" />
+          </Key>
+          <Property Name="Id_agent_skills" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_agent" Type="Int32" Nullable="false" />
+          <Property Name="Id_skills" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="BaseModel.FK_Agent_Skills_Agent" FromRole="Agent_Skills" ToRole="Agent" />
+          <NavigationProperty Name="Skills" Relationship="BaseModel.FK_Agent_Skills_Skills" FromRole="Agent_Skills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="Id_player" />
+          </Key>
+          <Property Name="Id_player" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nick_player" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login_player" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password_player" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Player_Agent" Relationship="BaseModel.FK_Player_Agent_Player" FromRole="Player" ToRole="Player_Agent" />
+        </EntityType>
+        <EntityType Name="Player_Agent">
+          <Key>
+            <PropertyRef Name="Id_player_agent" />
+          </Key>
+          <Property Name="Id_player_agent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_player" Type="Int32" Nullable="false" />
+          <Property Name="Id_agent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="BaseModel.FK_Player_Agent_Agent" FromRole="Player_Agent" ToRole="Agent" />
+          <NavigationProperty Name="Player" Relationship="BaseModel.FK_Player_Agent_Player" FromRole="Player_Agent" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Price_skills">
+          <Key>
+            <PropertyRef Name="Id_price_skills" />
+          </Key>
+          <Property Name="Id_price_skills" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price_skills1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Skills" Relationship="BaseModel.FK_Skills_Price_skills" FromRole="Price_skills" ToRole="Skills" />
+        </EntityType>
+        <EntityType Name="Role_agent">
+          <Key>
+            <PropertyRef Name="Id_role_agent" />
+          </Key>
+          <Property Name="Id_role_agent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title_role_agent" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription_role_agent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="BaseModel.FK_Agent_Role_agent" FromRole="Role_agent" ToRole="Agent" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="Id_skills" />
+          </Key>
+          <Property Name="Id_skills" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title_skills" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription_skills" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id_price_skills" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agent_Skills" Relationship="BaseModel.FK_Agent_Skills_Skills" FromRole="Skills" ToRole="Agent_Skills" />
+          <NavigationProperty Name="Price_skills" Relationship="BaseModel.FK_Skills_Price_skills" FromRole="Skills" ToRole="Price_skills" />
+        </EntityType>
+        <Association Name="FK_Agent_Role_agent">
+          <End Type="BaseModel.Role_agent" Role="Role_agent" Multiplicity="1" />
+          <End Type="BaseModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_agent">
+              <PropertyRef Name="Id_role_agent" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Id_role_agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Skills_Agent">
+          <End Type="BaseModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="BaseModel.Agent_Skills" Role="Agent_Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id_agent" />
+            </Principal>
+            <Dependent Role="Agent_Skills">
+              <PropertyRef Name="Id_agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Agent_Agent">
+          <End Type="BaseModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="BaseModel.Player_Agent" Role="Player_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id_agent" />
+            </Principal>
+            <Dependent Role="Player_Agent">
+              <PropertyRef Name="Id_agent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Skills_Skills">
+          <End Type="BaseModel.Skills" Role="Skills" Multiplicity="1" />
+          <End Type="BaseModel.Agent_Skills" Role="Agent_Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id_skills" />
+            </Principal>
+            <Dependent Role="Agent_Skills">
+              <PropertyRef Name="Id_skills" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Agent_Player">
+          <End Type="BaseModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="BaseModel.Player_Agent" Role="Player_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="Id_player" />
+            </Principal>
+            <Dependent Role="Player_Agent">
+              <PropertyRef Name="Id_player" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skills_Price_skills">
+          <End Type="BaseModel.Price_skills" Role="Price_skills" Multiplicity="1" />
+          <End Type="BaseModel.Skills" Role="Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price_skills">
+              <PropertyRef Name="Id_price_skills" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="Id_price_skills" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -178,6 +511,71 @@
                 <ScalarProperty Name="Id_gender" ColumnName="Id_gender" />
                 <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
                 <ScalarProperty Name="Id_role" ColumnName="Id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agent">
+            <EntityTypeMapping TypeName="BaseModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="Discreption_agent" ColumnName="Discreption_agent" />
+                <ScalarProperty Name="Id_role_agent" ColumnName="Id_role_agent" />
+                <ScalarProperty Name="Name_agent" ColumnName="Name_agent" />
+                <ScalarProperty Name="Id_agent" ColumnName="Id_agent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agent_Skills">
+            <EntityTypeMapping TypeName="BaseModel.Agent_Skills">
+              <MappingFragment StoreEntitySet="Agent_Skills">
+                <ScalarProperty Name="Id_skills" ColumnName="Id_skills" />
+                <ScalarProperty Name="Id_agent" ColumnName="Id_agent" />
+                <ScalarProperty Name="Id_agent_skills" ColumnName="Id_agent_skills" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player">
+            <EntityTypeMapping TypeName="BaseModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="Password_player" ColumnName="Password_player" />
+                <ScalarProperty Name="Login_player" ColumnName="Login_player" />
+                <ScalarProperty Name="Nick_player" ColumnName="Nick_player" />
+                <ScalarProperty Name="Id_player" ColumnName="Id_player" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player_Agent">
+            <EntityTypeMapping TypeName="BaseModel.Player_Agent">
+              <MappingFragment StoreEntitySet="Player_Agent">
+                <ScalarProperty Name="Id_agent" ColumnName="Id_agent" />
+                <ScalarProperty Name="Id_player" ColumnName="Id_player" />
+                <ScalarProperty Name="Id_player_agent" ColumnName="Id_player_agent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price_skills">
+            <EntityTypeMapping TypeName="BaseModel.Price_skills">
+              <MappingFragment StoreEntitySet="Price_skills">
+                <ScalarProperty Name="Price_skills1" ColumnName="Price_skills" />
+                <ScalarProperty Name="Id_price_skills" ColumnName="Id_price_skills" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_agent">
+            <EntityTypeMapping TypeName="BaseModel.Role_agent">
+              <MappingFragment StoreEntitySet="Role_agent">
+                <ScalarProperty Name="Discription_role_agent" ColumnName="Discription_role_agent" />
+                <ScalarProperty Name="Title_role_agent" ColumnName="Title_role_agent" />
+                <ScalarProperty Name="Id_role_agent" ColumnName="Id_role_agent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="BaseModel.Skills">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="Id_price_skills" ColumnName="Id_price_skills" />
+                <ScalarProperty Name="Discription_skills" ColumnName="Discription_skills" />
+                <ScalarProperty Name="Title_skills" ColumnName="Title_skills" />
+                <ScalarProperty Name="Id_skills" ColumnName="Id_skills" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

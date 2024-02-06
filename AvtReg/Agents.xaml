@@ -1,0 +1,27 @@
+﻿<Page x:Class="AvtReg.Agents"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AvtReg"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Agents">
+    <Page.Resources>
+
+        <DataTemplate x:Key="AgentValorant">
+            <StackPanel>
+                <TextBlock Text="{Binding Id_agent}"/>
+                <TextBlock Text="{Binding Name_agent}"/>
+                <TextBlock Text="{Binding RoleAgent}"/>
+                <TextBlock Text="{Binding Discreption_agent}"/>
+                <TextBlock Text="{Binding SkillsAgent}"/>
+            </StackPanel>
+        </DataTemplate>
+
+    </Page.Resources>
+    <Grid>
+        <ListView x:Name="AgentValorant" ItemTemplate="{StaticResource AgentValorant}"></ListView>
+    </Grid>
+</Page>

@@ -16,23 +16,15 @@ using System.Windows.Shapes;
 namespace AvtReg
 {
     /// <summary>
-    /// Логика взаимодействия для AdminMenu.xaml
+    /// Логика взаимодействия для Agents.xaml
     /// </summary>
-    public partial class AdminMenu : Page
+    public partial class Agents : Page
     {
-        public AdminMenu()
+        Person agent = new Person();
+        public Agents()
         {
             InitializeComponent();
-        }
-
-        private void adminfun_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AdminFun());
-        }
-
-        private void checkdb_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Agents());
+            AgentValorant.ItemsSource = agent.agent.ToList();
         }
     }
 }
