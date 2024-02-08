@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static AvtReg.Agent;
 
 namespace AvtReg
 {
@@ -25,6 +26,11 @@ namespace AvtReg
         {
             InitializeComponent();
             AgentValorant.ItemsSource = agent.agent.ToList();
+        }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminMenu());
         }
     }
 }

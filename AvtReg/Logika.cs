@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace AvtReg
 {
@@ -75,54 +77,90 @@ namespace AvtReg
             get { return skillsagent.Remove(skillsagent.Length - 2); }
             set { skillsagent = value; }
         }
-    }
 
-    public class Person
-    {
-        public List<Agent> agent;
-        public Person()
+        public int priceskills;
+        public string PriceSkills
         {
-            agent = newagent();
+            get { return Convert.ToString(priceskills); }
+            set { priceskills = Convert.ToInt32(value); }
         }
 
-        public List<Agent> newagent()
+        public bool Color { get => Convert.ToInt32(PriceSkills) >= 500; }
+        public SolidColorBrush BGColor
         {
-            List<Agent> agents = new List<Agent>();
-            Agent buff;
-            List<Agent> bduagents = DataBase.database.Agent.ToList();
-            List<Agent_Skills> bdagentskills = DataBase.database.Agent_Skills.ToList();
-            List<Skills> bdskills = DataBase.database.Skills.ToList();
-
-            foreach (Agent agent in bduagents)
+            get
             {
-                buff = new Agent();
-                buff.Id_agent = agent.Id_agent;
-                buff.Name_agent = agent.Name_agent;
-                buff.Id_role_agent = agent.Id_role_agent;
-                Role_agent role = DataBase.database.Role_agent.FirstOrDefault(x => x.Id_role_agent == buff.Id_role_agent);
-                buff.Discreption_agent = agent.Discreption_agent;;
-
-                string allagents = "";
-                foreach (Agent_Skills agent_Skills in bdagentskills)
+                if (Color)
                 {
-                    if (agent.Id_agent == agent_Skills.Id_agent)
+                    return Brushes.Blue;
+                }
+                else
+                {
+                    return Brushes.White;
+                }
+
+            }
+        }
+
+        public class Person
+        {
+            public List<Agent> agent;
+            public Person()
+            {
+                agent = newagent();
+            }
+
+            public List<Agent> newagent()
+            {
+                List<Agent> agents = new List<Agent>();
+                Agent buff;
+                List<Agent> bduagents = DataBase.database.Agent.ToList();
+                List<Agent_Skills> bdagentskills = DataBase.database.Agent_Skills.ToList();
+                List<Skills> bdskills = DataBase.database.Skills.ToList();
+                List<Price_skills> bdpriceskills = DataBase.database.Price_skills.ToList();
+
+                foreach (Agent agent in bduagents)
+                {
+                    buff = new Agent();
+                    buff.Id_agent = agent.Id_agent;
+                    buff.Name_agent = agent.Name_agent;
+                    buff.Id_role_agent = agent.Id_role_agent;
+                    Role_agent role = DataBase.database.Role_agent.FirstOrDefault(x => x.Id_role_agent == buff.Id_role_agent);
+                    buff.Discreption_agent = agent.Discreption_agent;
+
+                    string allagents = "";
+                    int allskills = 0;
+                    foreach (Agent_Skills agent_Skills in bdagentskills)
                     {
-                        foreach (Skills skillsagent in bdskills)
+                        if (agent.Id_agent == agent_Skills.Id_agent)
                         {
-                            if (agent_Skills.Id_skills == skillsagent.Id_skills)
+                            foreach (Skills skillsagent in bdskills)
                             {
-                                allagents += skillsagent.Title_skills + ", ";
-                                agent.skillsagent = allagents;
-                                break;
+                                if (agent_Skills.Id_skills == skillsagent.Id_skills)
+                                {
+                                    foreach (Price_skills priceskills in bdpriceskills)
+                                    {
+                                        if (skillsagent.Id_price_skills == priceskills.Id_price_skills)
+                                        {
+                                            allskills += priceskills.Price_skills1;
+                                        }
+                                    }
+                                    allagents += skillsagent.Title_skills + ", ";
+                                    agent.skillsagent = allagents;
+                                    agent.priceskills = allskills;
+                                    break;
+                                }
                             }
                         }
+
                     }
+                    buff.priceskills = agent.priceskills;
+                    buff.skillsagent = agent.skillsagent;
+                    buff.roleagent = role.Title_role_agent;
+                    agents.Add(buff);
                 }
-                buff.skillsagent = agent.skillsagent;
-                buff.roleagent = role.Title_role_agent;
-                agents.Add(buff);
+                return agents;
             }
-            return agents;
         }
     }
 }
