@@ -27,7 +27,7 @@
                     <TextBlock Text="Агенты Валорант" FontSize="30" FontWeight="Bold" Margin="0 0 0 10" HorizontalAlignment="Center"></TextBlock>
                     <Button x:Name="back" Click="back_Click" HorizontalAlignment="Center" Margin="10, 20" FontSize="20" Content="Выйти"></Button>
                     <ListView x:Name="AgentValorant" ItemTemplate="{StaticResource AgentValorant}"></ListView>
-                </StackPanel>
+                </StackPanel> 
             </Border>
         </ScrollViewer>
     </Grid>
