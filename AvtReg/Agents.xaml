@@ -25,6 +25,13 @@
             <Border Margin="15" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="50" Width="500">
                 <StackPanel>
                     <TextBlock Text="Агенты Валорант" FontSize="30" FontWeight="Bold" Margin="0 0 0 10" HorizontalAlignment="Center"></TextBlock>
+                    <GroupBox Header="Поиск и фильтрация" FontSize="15" HorizontalAlignment="Center" Width="350">
+                        <StackPanel Orientation="Horizontal" Width="350">
+                            <TextBox Name="Poisk" Width="150" TextChanged="Poisk_TextChanged"></TextBox>
+                            <ComboBox Name="Filter" Width="150" Margin="50,0,0,0" SelectionChanged="Filter_SelectionChanged"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <Button x:Name="addagent" Click="addagent_Click" Content="Добавить агента" HorizontalAlignment="Center" Margin="10" FontSize="20"></Button>
                     <Button x:Name="back" Click="back_Click" HorizontalAlignment="Center" Margin="10, 20" FontSize="20" Content="Выйти"></Button>
                     <ListView x:Name="AgentValorant" ItemTemplate="{StaticResource AgentValorant}"></ListView>
                 </StackPanel> 

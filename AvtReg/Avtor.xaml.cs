@@ -37,7 +37,7 @@ namespace AvtReg
                 }
                 if (user.Id_role == 2)
                 {
-                    NavigationService.Navigate(new UserMenu());
+                    NavigationService.Navigate(new UserMenu(user.Id_user));
                 }
             }
             else

@@ -110,7 +110,7 @@ namespace AvtReg
                     DataBase.database.User.Add(newUser);
                     DataBase.database.SaveChanges();
                     MessageBox.Show("Вы зарегистрировались!");
-                    NavigationService.Navigate(new UserMenu());
+                    NavigationService.Navigate(new UserMenu(user.Id_user));
                 }
                 catch
                 {

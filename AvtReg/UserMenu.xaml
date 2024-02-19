@@ -9,11 +9,35 @@
       Title="UserMenu">
 
     <Grid Background="LightBlue">
-        <Border Width="500" Margin="15" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="50">
+        <Border Width="500" Margin="150,0,150,0" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="50" Height="450">
             <StackPanel>
-                <TextBlock Text="Меню Пользователя" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Text="Вы ничего не можете" FontSize="20" HorizontalAlignment="Center" Margin="10"></TextBlock>
-                <Button x:Name="glav" Content="Выйти" Click="glav_Click"></Button>
+                <TextBlock Text="Акаунт пользователя" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"></TextBlock>
+                <Image Source="/images/avatar.jpg" Height="66" Width="82"></Image>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="150" FontSize="15">Имя</TextBlock>
+                    <TextBox Name="TBNAME" FontSize="15"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="150" FontSize="15">Фамилия</TextBlock>
+                    <TextBox Name="TBSURNAME" FontSize="15"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="150" FontSize="15">Отчество</TextBlock>
+                    <TextBox Name="TBPATRONYMIC" FontSize="15"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="150" FontSize="15">Дата рождения</TextBlock>
+                    <TextBox Name="TBDATEOFBIR" FontSize="15"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="100" FontSize="15">Пол</TextBlock>
+                    <ComboBox Name="CBPOL" FontSize="15" Width="100"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="logpass" Content="Изменить логин и пороль" Click="logpass_Click"  Width="220"></Button>
+                    <Button x:Name="save" Content="Сохранить изменения" Click="save_Click" Width="200" Margin="20"></Button>
+                </StackPanel>
+                <Button x:Name="glav" Content="Выйти" Click="glav_Click" Width="150"></Button>
             </StackPanel>
         </Border>
     </Grid>

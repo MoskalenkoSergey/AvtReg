@@ -15,7 +15,6 @@ namespace AvtReg
         {
             get { return gender; }
             set { gender = value; }
-
         }
 
         public string role;
@@ -64,18 +63,18 @@ namespace AvtReg
     }
     public partial class Agent
     {
+        public string skillsagent;
+        public string SkillsAgent
+        {
+            get { if (skillsagent == null) { return ""; } else { return skillsagent.Remove(skillsagent.Length - 2); } }
+            set { skillsagent = value; }
+        }
+
         public string roleagent;
         public string RoleAgent
         {
             get { return roleagent; }
             set { roleagent = value; }
-        }
-
-        public string skillsagent;
-        public string SkillsAgent
-        {
-            get { return skillsagent.Remove(skillsagent.Length - 2); }
-            set { skillsagent = value; }
         }
 
         public int priceskills;
